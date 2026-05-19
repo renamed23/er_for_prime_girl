@@ -68,7 +68,6 @@ class TextHookBuilder:
             console.print(f"已删除 assets 中的 dist 目录: {assets_dist}", style="warn")
 
         asset_dirs = [
-            "font",
             "hijacked",
             "x64dbg_1337_patch",
         ]
@@ -96,12 +95,14 @@ class TextHookBuilder:
                 )
 
         generated_dirs = [
+            "font",
             "raw_patch",
             "translated_patch",
             "raw_text",
             "translated_text",
             "resource_pack",
             "misc",
+            "exe",
         ]
         for dir_name in generated_dirs:
             current_dir = self.generated_dir / dir_name
@@ -122,7 +123,7 @@ class TextHookBuilder:
             "mapping.json",
             "config.json",
             "hook_lists.json",
-            "sjis_ext.bin",
+            "vfs_rules.json",
         ]
         for filename in config_files:
             src_file = self.generated_dir / filename

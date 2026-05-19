@@ -2,8 +2,6 @@ from er.utils import misc
 
 
 CONFIG = {
-    "REDIRECTION_SRC_PATH": "p_girl.scr",
-    "REDIRECTION_TARGET_PATH": "p_girl_chs.scr",
     "FONT_FACE": "SimSun",  # (ＭＳ ゴシック, SimHei, SimSun)
     "CHAR_SET": 134,  # CP932=128, GBK=134
     # "FONT_FILTER": [
@@ -61,6 +59,14 @@ HOOK_LISTS = {
     ],
 }
 
+VFS_RULES = [
+    {
+        "source": "{exe_dir}/p_girl.scr",
+        "target": "{exe_dir}/p_girl_chs.scr",
+        "mode": "fallback",  # force, fallback
+    },
+]
+
 
 # bind_asset_virtualizer, bind_font_manager, bind_lifecycle_guard, bind_path_redirector,
 # bind_text_mapping, bind_user_interface_patcher, bind_egui_io, bind_window_title_overrider,
@@ -79,7 +85,7 @@ FEATURES = [
     "bind_text_mapping",
     "bind_font_manager",
     "enable_iat_hook",
-    "bind_path_redirector",
+    "bind_vfs",
     "bind_user_interface_patcher",
     # "bind_lifecycle_guard",
     # "extract_text",
@@ -105,6 +111,7 @@ def generate_config_files() -> None:
     """生成配置文件"""
     misc.write_json("workspace/generated/config.json", CONFIG)
     misc.write_json("workspace/generated/hook_lists.json", HOOK_LISTS)
+    misc.write_json("workspace/generated/vfs_rules.json", VFS_RULES)
 
 
 def generate_bitmap_font_config(chars: str) -> None:
